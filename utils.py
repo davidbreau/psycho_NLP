@@ -2,10 +2,16 @@ import re
 from nltk.corpus import stopwords
 from string import punctuation
 from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
 from sklearn.base import BaseEstimator, TransformerMixin
 import emoji
 import nltk
+
 nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+manual_filter = ['really', 'know', 'get', 'would', 'ive', 'still', 'even', 'want', 'way', 'could', 'back', 'make', 'going', 'im', 'one', 'bit', 'much', 'dont', 'day', 'one', 'always', 'something', 'today', 'go', 'cant', 'say', 'never', 'didnt', 'made', 'someone', 'many', 'felt', 'feelings', 'though', 'also', 'need', 'every', 'lot', 'around', "'s", 'look', 'every', 'new', 'year', 'able', 'got', 'also', 'less', 'last', 'days', 'come', 'actually', 'makes', 'http', 't', 'don', 'm', 's']
 custom_stopwords = ['really', 'know', 'get', 'would', 'ive', 'still', 'even', 'want', 'way', 
                  'could', 'back', 'make', 'going', 'im', 'one', 'bit', 'much', 'dont', 'day', 
                  'one', 'always', 'something', 'today', 'go', 'cant', 'say', 'never', 'didnt', 
@@ -45,6 +51,15 @@ class Text_Preprocessor(BaseEstimator, TransformerMixin):
         text = emoji.demojize(text) ### Gestion des émojis
         
         tokens = [token for token in tokens if token not in punctuation] #### Supprimer la ponctuation
+
+    
+        stop_words = set(stopwords.words("english")) #### Supprimer les stop words
+        tokens = [token for token in tokens if token not in stop_words]
+        tokens = [token for token in tokens if token not in manual_filter] 
+
+        lemmatizer = WordNetLemmatizer()
+        tokens = [lemmatizer.lemmatize(token) for token in tokens]  # Ajout lemmatisation
+
 
         stop_words = set(stopwords.words("english")) #### Supprimer les stop words
         tokens = [token for token in tokens if token not in stop_words]
