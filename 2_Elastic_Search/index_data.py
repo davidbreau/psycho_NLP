@@ -7,7 +7,14 @@ from elasticsearch import Elasticsearch
 import joblib
 import requests
 import random
+from dotenv import load_dotenv
+import os
 
+load_dotenv()  # Load .env file
+
+model_path = os.getenv('MODEL_PATH') # ⬅️ .env = chemin complet vers ../1_Analyse/data/bow_model.pkl
+csv_path = os.getenv('CSV_PATH') # ⬅️ .env = chemin complet vers ../1_Analyse/data/gold.csv
+print(model_path)
 ###################################### Elactic Search init
 
 es = Elasticsearch([{'host': 'localhost', 'port': 9200, 'scheme': 'http'}])     # Connexion
@@ -33,7 +40,7 @@ def delete_documents(index):
 
 delete_documents(index) # Suppression des documents
 
-with open('/home/apprenant/Projets/NLP/psycho_NLP/2_Elastic_Search/data/model.pkl', 'rb') as f: # Charger le pipeline
+with open(model_path, 'rb') as f: # Charger le pipeline
     model = joblib.load(f)
 
 fake = Faker() # Instanciation
