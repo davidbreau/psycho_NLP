@@ -4,7 +4,6 @@ from string import punctuation
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.base import BaseEstimator, TransformerMixin
-import emoji
 import nltk
 
 nltk.download('punkt')
@@ -56,6 +55,4 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
 
         return preprocessed_text
 
-text_t = TextPreprocessor()
 
-print(text_t.transform(['text as example ']))
