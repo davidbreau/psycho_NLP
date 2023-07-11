@@ -55,6 +55,4 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
 
         return preprocessed_text
 
-text_t = TextPreprocessor()
 
-print(text_t.transform(['text as example ']))
