@@ -1,5 +1,10 @@
+# Chargement des variables d'environnement à partir du fichier .env
+set -a
+[ -f .env ] && . .env
+set +a
+
 docker run -d --name elastic \
-    -v /home/apprenant/elastic/psycho_nlp_data \
+    -v "$ELASTIC_DATA_DIR" \
     --net elastic \
     -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300 \
     -e "discovery.type=single-node" \

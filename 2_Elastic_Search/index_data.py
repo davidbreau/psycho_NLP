@@ -53,7 +53,7 @@ for _ in range(200):
     patient_lastname, patient_firstname = fake.last_name(), fake.first_name()
     patients.append((patient_lastname, patient_firstname))
 
-csv_file = '/home/apprenant/Projets/NLP/psycho_NLP/1_Analyse/data/gold.csv' # Chemin vers le fichier CSV
+csv_file = csv_path # Chemin vers le fichier CSV
 
 with open(csv_file, 'r') as file:       # Lecture du fichier CSV et indexation des données
     reader = csv.DictReader(file)
