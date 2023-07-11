@@ -61,8 +61,8 @@ with open(csv_file, 'r') as file:       # Lecture du fichier CSV et indexation d
 
     for row in reader:
         patient = random.choice(patients)   # Génération des valeurs Faker pour les champs nom et prenom
-        row['patient_firstname'] = patient[0]
-        row['patient_lastname'] = patient[1]
+        row['patient_firstname'] = patient[1]
+        row['patient_lastname'] = patient[0]
         row['emotion'] = model.predict([row['Text']])[0]
         row['confidence'] = model.predict_proba([row['Text']]).max()
         row['date'] =  fake.date_between(start_date='-365d', end_date='today').strftime("%Y-%m-%d")
