@@ -29,7 +29,7 @@ curl -X PUT "localhost:9200/notes" -H 'Content-Type: application/json' -d'
         "patient_left": {
             "type": "boolean"
         },
-        "emotion": {
+        "Emotion": {
             "type": "keyword"
         },
         "confidence": {
